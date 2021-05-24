@@ -93,7 +93,7 @@ class Game(Frame):
         raw_text_list = raw_text.split(' ')
         entire_word_list = []
         [entire_word_list.append(
-            x.lower()) for x in raw_text_list if x not in entire_word_list and len(x) > 3]
+            x.lower()) for x in raw_text_list if x.lower() not in entire_word_list and len(x) > 3]
 
         random.shuffle(entire_word_list)
         word_list = entire_word_list[:self.columns * self.rows]
