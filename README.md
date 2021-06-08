@@ -9,8 +9,23 @@ $ git clone git@github.com:ionlizarazu/takatekla.git
 ```
 
 ### Configure it for your stream
-You have to modify the secret.py file, and fill the username, oauth and channel parameters.
+You have to create the secret.py file, and fill the username, oauth and channel parameters.
+```
+# you don't need to replace server and port 
+server = "irc.chat.twitch.tv"
+port = 6667
+# the username you are going to use to send messages 
+username = 'username'
+# the oauth code to connect with your user
+# get it at https://twitchapps.com/tmi/
+oauth = "oauth:2432hjk342bn54jkbhjk543jhk543b"
+# the channel name you are goingo to connect to
+channel = 'channelname'
+```
 To get your oauth visit https://twitchapps.com/tmi/
+
+### Some extra configuration
+You can configure your language preferences at config.py file.
 
 ### Color configuration
 If you don't like default colors, you can modify the main and disabled colors at chat.py
@@ -22,7 +37,7 @@ You can modify the text.py raw parameter to get your own words list. You have to
 You can create your custom table size, starting from 1x1 to anything you want.
 ```
 $ cd takatekla
-$ python3 chat.py 4 4
+$ python3 takatekla.py 4 4
 ```
 ![irudia](https://user-images.githubusercontent.com/5443301/110205524-b3a45a00-7e78-11eb-96d7-80c011881455.png)
 
@@ -34,3 +49,25 @@ Now people have write the words at the screen to get points and win the game. He
 ![irudia](https://user-images.githubusercontent.com/5443301/110205693-e4d15a00-7e79-11eb-9274-983440d7f1de.png)
 
 As you can see, the "Ranking" text box is updated every word match, and offers you a chance
+
+## Add translations
+
+### Get new texts from code
+Most of translations are at game.py, so you can execute:
+```
+$ pygettext3 -d base -o locales/base.pot game.py
+```
+This way you can get the new translation needed texts.
+
+### Merge base pot file with each language
+```
+$ msgmerge --update locales/eu/LC_MESSAGES/base.po locales/base.pot
+$ msgmerge --update locales/en/LC_MESSAGES/base.po locales/base.pot
+```
+
+### Compile po files
+After translating them, compile the po files for each langauage.
+```
+$ msgfmt -o locales/eu/LC_MESSAGES/base.mo locales/eu/LC_MESSAGES/base
+$ msgfmt -o locales/en/LC_MESSAGES/base.mo locales/en/LC_MESSAGES/base
+```

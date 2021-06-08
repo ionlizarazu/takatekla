@@ -1,0 +1,1 @@
+language = ['en'] #options ['eu'], ['en']

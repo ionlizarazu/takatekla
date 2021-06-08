@@ -1,12 +1,18 @@
 from tkinter import *
 import random
 import text
+import config
 
 import socket
 import secret
 
 import re
 
+import gettext
+# set current language
+tr = gettext.translation('base', localedir='locales', languages=config.language)
+tr.install()
+_ = tr.gettext
 
 class Game(Frame):
 
@@ -43,7 +49,7 @@ class Game(Frame):
                 exec("self.e" + str(i) + str(j) + ".insert(END, '')")
 
         self.allowed_players_label = Label(
-            self.master, text="Allowed players:")
+            self.master, text=_("Allowed players:"))
         self.allowed_players_label.place(x=15 + self.columns * self.cellW + 15,
                                          y=70, width=self.cellW)
 
@@ -51,7 +57,7 @@ class Game(Frame):
         self.allowed_players.place(x=15 + self.columns * self.cellW + 15,
                                    y=70 + 20, width=self.cellW, height=self.rows * self.cellH / 2 - 20)
 
-        self.winners_label = Label(self.master, text="Ranking:")
+        self.winners_label = Label(self.master, text=_("Ranking:"))
         self.winners_label.place(x=15 + self.columns * self.cellW + 15,
                                  y=70 + (self.rows * self.cellH / 2), width=self.cellW)
 
@@ -60,19 +66,19 @@ class Game(Frame):
                            y=70 + (self.rows * self.cellH / 2) + 20, width=self.cellW, height=self.rows * self.cellH / 2 - 20)
 
     def create_widgets(self):
-        self.fill_table_btn = Button(self, text="Fill table", command=self.fill_table,
+        self.fill_table_btn = Button(self, text=_("Fill table"), command=self.fill_table,
                                      bg=self.colors["main-bg"], fg="white", font=('Arial', 20, 'bold'))
         self.fill_table_btn.pack(side="left")
 
-        self.start_chat_btn = Button(self, text="Start game!", command=self.start_chat,
+        self.start_chat_btn = Button(self, text=_("Start game!"), command=self.start_chat,
                                      bg=self.colors["main-bg"], fg="white", font=('Arial', 20, 'bold'))
         self.start_chat_btn.pack(side="left")
 
-        self.quit = Button(self, text="Close", bg="red", fg="white", font=('Arial', 20, 'bold'),
+        self.quit = Button(self, text=_("Close"), bg="red", fg="white", font=('Arial', 20, 'bold'),
                            command=self.master.destroy)
         self.quit.pack(side="right")
 
-        self.clear = Button(self, text="Clear", command=self.clear_table,
+        self.clear = Button(self, text=_("Clear"), command=self.clear_table,
                             bg=self.colors["disabled-bg"], fg="white", font=('Arial', 20, 'bold'))
         self.clear.pack(side="right")
 
@@ -113,7 +119,7 @@ class Game(Frame):
         s.send(('NICK %s\r\n' % secret.username).encode('utf-8'))
         s.send(('JOIN #%s\r\n' % secret.channel).encode('utf-8'))
         allowed_players_list = self.get_allowed_players()
-        self.send_message("Game has started, write the words in the chat!", s)
+        self.send_message(_("Game has started, write the words in the chat!"), s)
         counter = 0
         game_active = True
         while game_active:
@@ -128,9 +134,9 @@ class Game(Frame):
                 else:
                     counter = counter + self.check_message(username, msg)
 
-                if username == secret.username and msg == '!g' or counter == (self.rows * self.columns):
+                if username == secret.username and msg == '!stop' or counter == (self.rows * self.columns):
                     game_active = False
-                    self.send_message("Game Over!", s)
+                    self.send_message(_("Game Over!"), s)
 
     def check_message(self, username, msg):
         coor = self.search_text_match(msg)
