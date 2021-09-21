@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2021-06-08 19:25+0200\n"
+"POT-Creation-Date: 2021-06-14 18:53+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,34 +15,46 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: pygettext.py 1.5\n"
 
-#: game.py:52
-msgid "Allowed players:"
-msgstr "Allowed players:"
-
-#: game.py:60
+#: game.py:59
 msgid "Ranking:"
 msgstr "Ranking:"
 
-#: game.py:69
+#: game.py:68
+msgid "Allowed players:"
+msgstr "Allowed players:"
+
+#: game.py:88
+msgid "Results:"
+msgstr "Results:"
+
+#: game.py:92 game.py:115
+msgid "TAKA:"
+msgstr "Team1"
+
+#: game.py:97 game.py:124
+msgid "TEKLA:"
+msgstr "Team2"
+
+#: game.py:134
 msgid "Fill table"
 msgstr "Fill table"
 
-#: game.py:73
+#: game.py:139 game.py:151
 msgid "Start game!"
 msgstr "Start game!"
 
-#: game.py:77
+#: game.py:143 game.py:155
 msgid "Close"
 msgstr "Close"
 
-#: game.py:81
+#: game.py:147 game.py:159
 msgid "Clear"
 msgstr "Clear"
 
-#: game.py:122
+#: game.py:202 game.py:231
 msgid "Game has started, write the words in the chat!"
 msgstr "Game has started, write the words in the chat!"
 
-#: game.py:139
+#: game.py:219 game.py:250
 msgid "Game Over!"
 msgstr "Game Over!"
