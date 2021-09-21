@@ -10,9 +10,7 @@ cellW = 252
 cellH = 80
 
 # you can modify default main colors here
-colors = {
-    "panel-bg": "#30261c", "main-bg": "#1F5F61", "disabled-bg": "#0B8185"
-}
+colors = {"panel-bg": "#30261c", "main-bg": "#1F5F61", "disabled-bg": "#0B8185"}
 
 master = Tk()
 game = Game(cellW, cellH, rows, columns, master, mode, colors=colors)
