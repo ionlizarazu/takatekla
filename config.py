@@ -1,1 +1,1 @@
-language = ['eu'] #options ['eu'], ['en']
+language = ["eu"]  # options ['eu'], ['en']
