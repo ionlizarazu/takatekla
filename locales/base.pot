@@ -58,4 +58,3 @@ msgstr ""
 #: game.py:219 game.py:250
 msgid "Game Over!"
 msgstr ""
-

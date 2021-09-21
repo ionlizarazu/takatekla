@@ -11,10 +11,10 @@ $ git clone git@github.com:ionlizarazu/takatekla.git
 ### Configure it for your stream
 You have to create the secret.py file, and fill the username, oauth and channel parameters.
 ```
-# you don't need to replace server and port 
+# you don't need to replace server and port
 server = "irc.chat.twitch.tv"
 port = 6667
-# the username you are going to use to send messages 
+# the username you are going to use to send messages
 username = 'username'
 # the oauth code to connect with your user
 # get it at https://twitchapps.com/tmi/
