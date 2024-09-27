@@ -1,18 +1,18 @@
-from tkinter import *
-import random
-import text
-import config
-import logging
-
-import socket
-import secret
-
-import re
-
 import gettext
+import logging
+import random
+import re
+import socket
+from tkinter import END, Button, Label, Text
+
+import config
+import secret
+import text
 
 # set current language
-tr = gettext.translation("base", localedir="locales", languages=config.language)
+tr = gettext.translation(
+    "base", localedir="locales", languages=config.language
+)
 tr.install()
 _ = tr.gettext
 logging.basicConfig(filename="example.log", level=logging.DEBUG)
@@ -34,7 +34,9 @@ class Game(Frame):
         master.configure(background=colors["panel-bg"])
         master.title("TAKATEKLA")
         master.geometry(
-            str(columns * cellW + 30 + cellW + 30) + "x" + str((rows * cellH) + 80)
+            str(columns * cellW + 30 + cellW + 30)
+            + "x"
+            + str((rows * cellH) + 80)
         )
         self.master = master
         self.cellW = cellW
@@ -99,30 +101,45 @@ class Game(Frame):
                 exec("self.e" + str(i) + str(j) + ".insert(END, '')")
         self.winners_label = Label(self.master, text=_("Ranking:"))
         self.winners_label.place(
-            x=self.base_starting_x + self.columns * self.cellW + self.base_starting_x,
+            x=self.base_starting_x
+            + self.columns * self.cellW
+            + self.base_starting_x,
             y=self.base_starting_y + 2 * self.cellH,
             width=self.cellW,
         )
 
         self.winners = Text(self.master)
         self.winners.place(
-            x=self.base_starting_x + self.columns * self.cellW + self.base_starting_x,
+            x=self.base_starting_x
+            + self.columns * self.cellW
+            + self.base_starting_x,
             y=self.base_starting_y + 20 + 2 * self.cellH,
             width=self.cellW,
             height=self.rows * self.cellH / 2 - 20,
         )
 
-        self.allowed_players_label = Label(self.master, text=_("Allowed players:"))
+        self.allowed_players_label = Label(
+            self.master, text=_("Allowed players:")
+        )
         self.allowed_players_label.place(
-            x=self.base_starting_x + self.columns * self.cellW + self.base_starting_x,
-            y=self.base_starting_y + (self.rows * self.cellH / 2) + 2 * self.cellH,
+            x=self.base_starting_x
+            + self.columns * self.cellW
+            + self.base_starting_x,
+            y=self.base_starting_y
+            + (self.rows * self.cellH / 2)
+            + 2 * self.cellH,
             width=self.cellW,
         )
 
         self.allowed_players = Text(self.master)
         self.allowed_players.place(
-            x=self.base_starting_x + self.columns * self.cellW + self.base_starting_x,
-            y=self.base_starting_y + (self.rows * self.cellH / 2) + 20 + 2 * self.cellH,
+            x=self.base_starting_x
+            + self.columns * self.cellW
+            + self.base_starting_x,
+            y=self.base_starting_y
+            + (self.rows * self.cellH / 2)
+            + 20
+            + 2 * self.cellH,
             width=self.cellW,
             height=self.rows * self.cellH / 2 - 20 - 2 * self.cellH,
         )
@@ -150,14 +167,18 @@ class Game(Frame):
 
         self.results_label = Label(self.master, text=_("Results:"))
         self.results_label.place(
-            x=self.base_starting_x + self.columns * self.cellW + self.base_starting_x,
+            x=self.base_starting_x
+            + self.columns * self.cellW
+            + self.base_starting_x,
             y=self.base_starting_y + 2 * self.cellH,
             width=self.cellW,
         )
 
         self.taka_r_label = Label(self.master, text=_("TAKA:"))
         self.taka_r_label.place(
-            x=self.base_starting_x + self.columns * self.cellW + self.base_starting_x,
+            x=self.base_starting_x
+            + self.columns * self.cellW
+            + self.base_starting_x,
             y=self.base_starting_y + 2 * self.cellH + 20,
             width=self.cellW / 2,
         )
@@ -174,7 +195,9 @@ class Game(Frame):
 
         self.taka_points = Text(self.master)
         self.taka_points.place(
-            x=self.base_starting_x + self.columns * self.cellW + self.base_starting_x,
+            x=self.base_starting_x
+            + self.columns * self.cellW
+            + self.base_starting_x,
             y=self.base_starting_y + 20 + 20 + 2 * self.cellH,
             width=self.cellW / 2,
             height=self.rows * self.cellH / 6 - 30,
@@ -199,15 +222,24 @@ class Game(Frame):
 
         self.taka_label = Label(self.master, text=_("TAKA:"))
         self.taka_label.place(
-            x=self.base_starting_x + self.columns * self.cellW + self.base_starting_x,
-            y=self.base_starting_y + (self.rows * self.cellH / 2) + 2 * self.cellH,
+            x=self.base_starting_x
+            + self.columns * self.cellW
+            + self.base_starting_x,
+            y=self.base_starting_y
+            + (self.rows * self.cellH / 2)
+            + 2 * self.cellH,
             width=self.cellW / 2,
         )
 
         self.taka = Text(self.master)
         self.taka.place(
-            x=self.base_starting_x + self.columns * self.cellW + self.base_starting_x,
-            y=self.base_starting_y + (self.rows * self.cellH / 2) + 20 + 2 * self.cellH,
+            x=self.base_starting_x
+            + self.columns * self.cellW
+            + self.base_starting_x,
+            y=self.base_starting_y
+            + (self.rows * self.cellH / 2)
+            + 20
+            + 2 * self.cellH,
             width=self.cellW / 2,
             height=self.rows * self.cellH / 2 - 20 - 2 * self.cellH,
         )
@@ -218,7 +250,9 @@ class Game(Frame):
             + self.columns * self.cellW
             + self.cellW / 2
             + self.base_starting_x,
-            y=self.base_starting_y + (self.rows * self.cellH / 2) + 2 * self.cellH,
+            y=self.base_starting_y
+            + (self.rows * self.cellH / 2)
+            + 2 * self.cellH,
             width=self.cellW / 2,
         )
 
@@ -228,7 +262,10 @@ class Game(Frame):
             + self.columns * self.cellW
             + self.cellW / 2
             + self.base_starting_x,
-            y=self.base_starting_y + (self.rows * self.cellH / 2) + 20 + 2 * self.cellH,
+            y=self.base_starting_y
+            + (self.rows * self.cellH / 2)
+            + 20
+            + 2 * self.cellH,
             width=self.cellW / 2,
             height=self.rows * self.cellH / 2 - 20 - 2 * self.cellH,
         )
@@ -320,7 +357,12 @@ class Game(Frame):
                 )
 
                 exec("self.e" + str(i) + str(j) + ".delete(0,END)")
-                exec("self.e" + str(i) + str(j) + ".insert(0, self.the_list[i][j])")
+                exec(
+                    "self.e"
+                    + str(i)
+                    + str(j)
+                    + ".insert(0, self.the_list[i][j])"
+                )
 
     def word_list_from_text(self):
         raw_text = re.sub(r"[^a-zA-Z0-9]+", " ", text.raw)
@@ -337,7 +379,11 @@ class Game(Frame):
         formatted_word_list = []
         for i in range(self.rows):
             formatted_word_list.append(
-                list(word_list[i * self.columns : i * self.columns + self.columns])
+                list(
+                    word_list[
+                        i * self.columns : i * self.columns + self.columns
+                    ]
+                )
             )
 
         self.the_list = formatted_word_list
@@ -351,7 +397,9 @@ class Game(Frame):
         s.send(("NICK %s\r\n" % secret.username).encode("utf-8"))
         s.send(("JOIN #%s\r\n" % secret.channel).encode("utf-8"))
         allowed_players_list = self.get_allowed_players()
-        self.send_message(_("Game has started, write the words in the chat!"), s)
+        self.send_message(
+            _("Game has started, write the words in the chat!"), s
+        )
         counter = 0
         total_counter = self.rows * self.columns
         game_active = True
@@ -362,7 +410,10 @@ class Game(Frame):
             messages = raw_msg.split("\r\n")
 
             for message in messages:
-                if message.strip() and "PRIVMSG #" + secret.username in message:
+                if (
+                    message.strip()
+                    and "PRIVMSG #" + secret.username in message
+                ):
                     username = re.search(r"\w+", message).group(0)
                     message = CHAT_MSG.sub("", message)
                     msg = message.replace("@", "")
@@ -372,7 +423,9 @@ class Game(Frame):
                     logging.info("   Aukeratua: %s" % (msg))
                     if allowed_players_list:
                         if username in allowed_players_list:
-                            counter = counter + self.check_message(username, msg)
+                            counter = counter + self.check_message(
+                                username, msg
+                            )
                     else:
                         counter = counter + self.check_message(username, msg)
 
@@ -394,7 +447,9 @@ class Game(Frame):
         s.send(("JOIN #%s\r\n" % secret.channel).encode("utf-8"))
         self.taka_team = self.get_taka_team()
         self.tekla_team = self.get_tekla_team()
-        self.send_message(_("Game has started, write the words in the chat!"), s)
+        self.send_message(
+            _("Game has started, write the words in the chat!"), s
+        )
         print(self.taka_team)
         counter = 0
         game_active = True
@@ -458,7 +513,11 @@ class Game(Frame):
         return [i for i in str_list if i]
 
     def send_message(self, message, s):
-        s.send("PRIVMSG #{0} :{1}\r\n".format(secret.username, message).encode("utf-8"))
+        s.send(
+            "PRIVMSG #{0} :{1}\r\n".format(secret.username, message).encode(
+                "utf-8"
+            )
+        )
 
     def search_text_match(self, text):
         for i in range(self.rows):
@@ -517,7 +576,9 @@ class Game(Frame):
     def get_ranking(self):
         ordered_players = ""
         for k, v in sorted(
-            self.players.items(), key=lambda item: item[1]["points"], reverse=True
+            self.players.items(),
+            key=lambda item: item[1]["points"],
+            reverse=True,
         ):
             ordered_players += k + ": " + str(v["points"]) + "\n"
         self.winners.delete("1.0", END)
